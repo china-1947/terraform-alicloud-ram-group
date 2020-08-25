@@ -23,20 +23,20 @@ resource "alicloud_ram_group" "this" {
   force    = var.force_destroy
 }
 
-resource "alicloud_ram_group_membership" "iam_user_group_membership" {
+resource "alicloud_ram_group_membership" "group_users" {
   count      = length(var.group_users) > 0 && var.create_group ? 1 : 0
   group_name = alicloud_ram_group.this[0].name
   user_names = var.group_users
 }
 
-resource "alicloud_ram_group_policy_attachment" "system_policy_attach" {
+resource "alicloud_ram_group_policy_attachment" "system" {
   for_each = toset(var.system_policies)
   policy_name = each.value
   policy_type = "System"
   group_name  = alicloud_ram_group.this[0].name
 }
 
-resource "alicloud_ram_group_policy_attachment" "custom_policy_attach" {
+resource "alicloud_ram_group_policy_attachment" "custom" {
   for_each = toset(var.custom_policies)
   policy_name = each.value
   policy_type = "Custom"
