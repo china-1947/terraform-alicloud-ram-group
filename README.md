@@ -44,7 +44,7 @@ module "ram-group" {
 
 Authors
 -------
-Created by Brian Mori (@brianmori).
+Created and maintained by Alibaba Cloud Terraform Team(terraform@alibabacloud.com)
 
 
 License
